@@ -1,10 +1,6 @@
-package com.example.marvelappkotlin.view
+package com.example.marvelappkotlin.ui
 
 import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import com.example.marvelappkotlin.R
-import com.example.marvelappkotlin.model.Character
-import kotlinx.android.synthetic.main.item_character.*
 
 class DetailActivity : AppCompatActivity() {
 

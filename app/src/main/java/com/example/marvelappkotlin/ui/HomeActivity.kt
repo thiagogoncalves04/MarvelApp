@@ -1,10 +1,8 @@
-package com.example.marvelappkotlin.view
+package com.example.marvelappkotlin.ui
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
 import com.example.marvelappkotlin.HomeContract
 import com.example.marvelappkotlin.OnImageClick

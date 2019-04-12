@@ -1,7 +1,7 @@
 package com.example.marvelappkotlin
 
-import com.example.marvelappkotlin.model.Character
 import com.example.marvelappkotlin.model.Response
+import com.example.marvelappkotlin.ui.Crypto
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
 import okhttp3.OkHttpClient

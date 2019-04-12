@@ -39,6 +39,7 @@ class CharacterAdapter(var characters: MutableList<Character>, val listener: OnI
             itemView.setOnClickListener {
                 listener.onCardClicked(character)
             }
+            itemView.setOnClickListener{listener.onCardClicked(character)}
         }
     }
 
@@ -46,13 +47,11 @@ class CharacterAdapter(var characters: MutableList<Character>, val listener: OnI
         val characterDiff = object : DiffUtil.ItemCallback<Character>() {
             override fun areItemsTheSame(old: Character, new: Character): Boolean {
                 return old.id == new.id
-
             }
 
             override fun areContentsTheSame(old: Character, new: Character): Boolean {
                 return old == new
             }
-
         }
     }
 }

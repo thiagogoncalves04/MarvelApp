@@ -1,24 +1,25 @@
 package com.example.marvelappkotlin.presenter
 
 import android.util.Log
+import com.example.marvelappkotlin.HomeContract
 import com.example.marvelappkotlin.MarvelAPI
 import com.example.marvelappkotlin.model.Character
-import com.example.marvelappkotlin.view.HomeActivity
+import com.example.marvelappkotlin.ui.HomeActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class HomePresenter {
-    lateinit var activity: HomeActivity
-    var characterList : ArrayList<Character> = ArrayList()
+class HomePresenter : HomeContract.Presenter {
 
-    fun create(activity: HomeActivity){
+    lateinit var activity: HomeActivity
+    var characterList: ArrayList<Character> = ArrayList()
+
+    override fun create(activity: HomeActivity) {
         subscribeToList()
         this.activity = activity
-
     }
 
-    private fun subscribeToList() {
-        val disposable = MarvelAPI.getService().allCharacters()
+    override fun subscribeToList() {
+        val observable = MarvelAPI.getService().allCharacters()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe(

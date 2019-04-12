@@ -1,6 +1,5 @@
-package com.example.marvelappkotlin
+package com.example.marvelappkotlin.ui
 
-import android.provider.SyncStateContract.Helpers.update
 import java.security.NoSuchAlgorithmException
 
 
