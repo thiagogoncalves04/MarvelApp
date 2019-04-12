@@ -1,6 +1,4 @@
 package com.example.marvelappkotlin.adapter
-
-import android.arch.paging.PagedListAdapter
 import android.content.Context
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
@@ -14,20 +12,20 @@ import com.example.marvelappkotlin.OnImageClick
 import com.example.marvelappkotlin.R
 import kotlinx.android.synthetic.main.item_character.view.*
 
-class CharactersAdapter(var characters: MutableList<Character>, val listener: OnImageClick, val context: Context) :
-    RecyclerView.Adapter<CharactersAdapter.VH>(){
+class CharacterAdapter(var characters: MutableList<Character>, val listener: OnImageClick, val context: Context) :
+    RecyclerView.Adapter<CharacterAdapter.VH>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false)
         return VH(view)
     }
 
-    override fun onBindViewHolder(p0: CharactersAdapter.VH, p1: Int) {
+    override fun onBindViewHolder(p0: CharacterAdapter.VH, p1: Int) {
         p0.bind(characters[p1])
     }
 
     override fun getItemCount(): Int {
-       return characters.size
+        return characters.size
     }
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,7 +36,7 @@ class CharactersAdapter(var characters: MutableList<Character>, val listener: On
 
             Glide.with(context)
                 .load("${character?.thumbnail?.path}/standard_medium.${character?.thumbnail?.extension}").into(imageView)
-                itemView.setOnClickListener {
+            itemView.setOnClickListener {
                 listener.onCardClicked(character)
             }
         }
