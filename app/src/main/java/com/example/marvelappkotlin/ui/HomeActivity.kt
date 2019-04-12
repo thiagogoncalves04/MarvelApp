@@ -1,10 +1,12 @@
 package com.example.marvelappkotlin.view
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
+import com.example.marvelappkotlin.HomeContract
 import com.example.marvelappkotlin.OnImageClick
 import com.example.marvelappkotlin.R
 import com.example.marvelappkotlin.adapter.CharacterAdapter
@@ -12,7 +14,7 @@ import com.example.marvelappkotlin.model.Character
 import com.example.marvelappkotlin.presenter.HomePresenter
 import kotlinx.android.synthetic.main.home_main.*
 
-class HomeActivity : AppCompatActivity(), OnImageClick {
+class HomeActivity : AppCompatActivity(), OnImageClick, HomeContract.View {
 
     lateinit var adapter: CharacterAdapter
     lateinit var presenter: HomePresenter
@@ -26,24 +28,31 @@ class HomeActivity : AppCompatActivity(), OnImageClick {
         initView()
     }
 
-    fun initView(){
-        setupRecyclerView();
+    override fun initView() {
+        setupRecyclerView()
         presenter.create(this)
+        showLoading()
     }
 
-    fun setupRecyclerView(){
+    override fun setupRecyclerView() {
         val llm = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerCharacters.layoutManager = llm
         recyclerCharacters.adapter = adapter
     }
 
-    override fun onCardClicked(character: Character) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    fun showCharacter(listCharacter: ArrayList<Character>){
+    override fun showCharacter(listCharacter: ArrayList<Character>) {
         adapter.characters.clear()
         adapter.characters.addAll(listCharacter)
         adapter.notifyDataSetChanged()
     }
+
+    override fun onCardClicked(character: Character) {
+        startActivity(Intent(this, DetailActivity::class.java).apply {
+            putExtra("detalhe", character)
+        })
+    }
+
+    override fun showLoading() {
+    }
 }
+
