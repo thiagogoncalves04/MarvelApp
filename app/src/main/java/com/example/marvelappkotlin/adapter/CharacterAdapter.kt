@@ -1,4 +1,5 @@
 package com.example.marvelappkotlin.adapter
+
 import android.content.Context
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
@@ -10,10 +11,11 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.marvelappkotlin.OnImageClick
 import com.example.marvelappkotlin.R
+import kotlinx.android.synthetic.main.activity_detail.view.*
 import kotlinx.android.synthetic.main.item_character.view.*
 
 class CharacterAdapter(var characters: MutableList<Character>, val listener: OnImageClick, val context: Context) :
-    RecyclerView.Adapter<CharacterAdapter.VH>(){
+    RecyclerView.Adapter<CharacterAdapter.VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false)
@@ -32,26 +34,15 @@ class CharacterAdapter(var characters: MutableList<Character>, val listener: OnI
         lateinit var imageView: ImageView
         fun bind(character: Character) {
             imageView = itemView.findViewById(R.id.image_character)
-            itemView.text_character.text = character?.name
+            itemView.text_item_character.text = character?.name
 
             Glide.with(context)
-                .load("${character?.thumbnail?.path}/standard_medium.${character?.thumbnail?.extension}").into(imageView)
+                .load("${character?.thumbnail?.path}/standard_medium.${character?.thumbnail?.extension}")
+                .into(imageView)
             itemView.setOnClickListener {
                 listener.onCardClicked(character)
             }
-            itemView.setOnClickListener{listener.onCardClicked(character)}
-        }
-    }
-
-    companion object {
-        val characterDiff = object : DiffUtil.ItemCallback<Character>() {
-            override fun areItemsTheSame(old: Character, new: Character): Boolean {
-                return old.id == new.id
-            }
-
-            override fun areContentsTheSame(old: Character, new: Character): Boolean {
-                return old == new
-            }
+            itemView.setOnClickListener { listener.onCardClicked(character) }
         }
     }
 }

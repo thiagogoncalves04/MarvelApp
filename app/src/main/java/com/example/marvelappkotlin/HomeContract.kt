@@ -11,13 +11,10 @@ interface HomeContract {
         fun setupRecyclerView()
         fun onCardClicked(character: Character)
         fun showCharacter(listCharacter: ArrayList<Character>)
-
     }
 
     interface Presenter {
         fun create(activity: HomeActivity)
-        fun subscribeToList()
-
+        fun subscribeToList(nextPage: Int)
     }
-
 }

@@ -4,15 +4,15 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
-import com.example.marvelappkotlin.HomeContract
-import com.example.marvelappkotlin.OnImageClick
-import com.example.marvelappkotlin.R
+import android.view.View
+import android.widget.ProgressBar
+import com.example.marvelappkotlin.*
 import com.example.marvelappkotlin.adapter.CharacterAdapter
 import com.example.marvelappkotlin.model.Character
 import com.example.marvelappkotlin.presenter.HomePresenter
 import kotlinx.android.synthetic.main.home_main.*
 
-class HomeActivity : AppCompatActivity(), OnImageClick, HomeContract.View {
+class HomeActivity : AppCompatActivity(), OnImageClick, HomeContract.View, LoadMore {
 
     lateinit var adapter: CharacterAdapter
     lateinit var presenter: HomePresenter
@@ -27,20 +27,22 @@ class HomeActivity : AppCompatActivity(), OnImageClick, HomeContract.View {
     }
 
     override fun initView() {
+        showLoading()
         setupRecyclerView()
         presenter.create(this)
-        showLoading()
     }
 
     override fun setupRecyclerView() {
         val llm = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerCharacters.layoutManager = llm
+        recyclerCharacters.addOnScrollListener(ScrollListener(llm, this))
         recyclerCharacters.adapter = adapter
     }
 
     override fun showCharacter(listCharacter: ArrayList<Character>) {
         adapter.characters.clear()
         adapter.characters.addAll(listCharacter)
+        hideLoading()
         adapter.notifyDataSetChanged()
     }
 
@@ -50,7 +52,17 @@ class HomeActivity : AppCompatActivity(), OnImageClick, HomeContract.View {
         })
     }
 
+    override fun onLoadMore() {
+        presenter.loadMore()
+    }
+
     override fun showLoading() {
+        val loading = findViewById<ProgressBar>(R.id.loading)
+        loading.visibility = View.VISIBLE
+    }
+
+    fun hideLoading() {
+        val loading = findViewById<ProgressBar>(R.id.loading)
+        loading.visibility = View.INVISIBLE
     }
 }
-

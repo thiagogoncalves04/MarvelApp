@@ -1,4 +1,4 @@
-package com.example.marvelappkotlin.ui
+package com.example.marvelappkotlin.util
 
 import java.security.NoSuchAlgorithmException
 
