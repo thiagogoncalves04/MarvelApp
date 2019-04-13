@@ -4,6 +4,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
+import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import com.example.marvelappkotlin.*
@@ -24,6 +27,22 @@ class HomeActivity : AppCompatActivity(), OnImageClick, HomeContract.View, LoadM
         presenter = HomePresenter()
         adapter = CharacterAdapter(ArrayList(), this, this)
         initView()
+
+        setSupportActionBar(toolbar as Toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId){
+            R.id.sort_by_date -> {
+                presenter.sortByDate()
+            }
+        }
+        return true
     }
 
     override fun initView() {
