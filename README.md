@@ -24,5 +24,5 @@ Apenas é necessário o próprio aparelho Android.
 - **RxJava/RxKotlin** - biblioteca de programação reativa para atualização de dados da aplicação
 - **Glide** - biblioteca utilizada para adicionar fotos a objetos a partir de uma URL, com cache
 
-##Autor
+## Autor
 - Thiago Gonçalves
