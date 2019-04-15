@@ -39,7 +39,7 @@ class HomePresenter : HomeContract.Presenter {
             )
     }
 
-    fun loadMore() {
+    override fun loadMore() {
         if (!isLoading) {
             val correntPage = characterList.size / pageSize
             subscribeToList(correntPage + 1)
@@ -47,7 +47,7 @@ class HomePresenter : HomeContract.Presenter {
         }
     }
 
-    fun sortByDate() {
+    override fun sortByDate() {
         characterList.sortBy { it.modified }
         activity.showCharacter(characterList)
     }

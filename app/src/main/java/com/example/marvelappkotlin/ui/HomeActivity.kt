@@ -80,7 +80,7 @@ class HomeActivity : AppCompatActivity(), OnImageClick, HomeContract.View, LoadM
         loading.visibility = View.VISIBLE
     }
 
-    fun hideLoading() {
+    override fun hideLoading() {
         val loading = findViewById<ProgressBar>(R.id.loading)
         loading.visibility = View.INVISIBLE
     }

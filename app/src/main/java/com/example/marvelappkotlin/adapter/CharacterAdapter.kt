@@ -1,7 +1,6 @@
 package com.example.marvelappkotlin.adapter
 
 import android.content.Context
-import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import com.example.marvelappkotlin.model.Character
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.marvelappkotlin.OnImageClick
 import com.example.marvelappkotlin.R
-import kotlinx.android.synthetic.main.activity_detail.view.*
 import kotlinx.android.synthetic.main.item_character.view.*
 
 class CharacterAdapter(var characters: MutableList<Character>, val listener: OnImageClick, val context: Context) :

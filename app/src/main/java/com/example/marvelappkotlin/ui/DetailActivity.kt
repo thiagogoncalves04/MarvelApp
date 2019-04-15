@@ -6,9 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.marvelappkotlin.R
 import com.example.marvelappkotlin.model.Character
+import com.example.marvelappkotlin.DetailContract
 import kotlinx.android.synthetic.main.activity_detail.*
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), DetailContract.View {
 
     private lateinit var character: Character
 
@@ -17,7 +18,14 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         initViews()
+    }
 
+    override fun initViews() {
+        setCharacter()
+        backPage()
+    }
+
+    override fun setCharacter(){
         intent.extras?.get("detalhe")?.also {
             character = it as Character
             title_character.text = character.name
@@ -29,14 +37,11 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun initViews() {
-        backPage()
-    }
-
-    fun backPage(){
+    override fun backPage(){
         button_backpage.setOnClickListener{
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }
