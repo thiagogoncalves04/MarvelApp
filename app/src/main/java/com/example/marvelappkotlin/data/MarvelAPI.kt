@@ -21,37 +21,37 @@ interface MarvelAPI {
     }
 
     @GET("characters")
-    fun allCharacters(@Query("offset") offset: Int? = 0): Observable<Response>
+fun allCharacters(@Query("offset") offset: Int? = 0): Observable<Response>
 
-    companion object {
-        fun getService(): MarvelAPI {
-            val logging = HttpLoggingInterceptor()
-            logging.level = HttpLoggingInterceptor.Level.BODY
+companion object {
+    fun getService(): MarvelAPI {
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY
 
-            val httpClient = OkHttpClient.Builder()
-            httpClient.addInterceptor(logging)
-            httpClient.addInterceptor { chain ->
-                val original = chain.request()
-                val originalHttpUrl = original.url()
+        val httpClient = OkHttpClient.Builder()
+        httpClient.addInterceptor(logging)
+        httpClient.addInterceptor { chain ->
+            val original = chain.request()
+            val originalHttpUrl = original.url()
 
-                val ts = (Calendar.getInstance(TimeZone.getTimeZone("UTC")).timeInMillis / 1000L).toString()
-                val url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("apikey", DbConstants.API_KEY)
-                    .addQueryParameter("ts", ts)
-                    .addQueryParameter("hash", Crypto.md5("$ts${DbConstants.PRIVATE_KEY}${DbConstants.API_KEY}"))
-                    .build()
-
-                chain.proceed(original.newBuilder().url(url).build())
-            }
-            val gson = GsonBuilder().setLenient().create()
-            val retrofit = Retrofit.Builder()
-                .baseUrl("http://gateway.marvel.com/v1/public/")
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(httpClient.build())
+            val ts = (Calendar.getInstance(TimeZone.getTimeZone("UTC")).timeInMillis / 1000L).toString()
+            val url = originalHttpUrl.newBuilder()
+                .addQueryParameter("apikey", DbConstants.API_KEY)
+                .addQueryParameter("ts", ts)
+                .addQueryParameter("hash", Crypto.md5("$ts${DbConstants.PRIVATE_KEY}${DbConstants.API_KEY}"))
                 .build()
 
-            return retrofit.create<MarvelAPI>(MarvelAPI::class.java)
+            chain.proceed(original.newBuilder().url(url).build())
         }
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://gateway.marvel.com/v1/public/")
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(httpClient.build())
+            .build()
+
+        return retrofit.create<MarvelAPI>(MarvelAPI::class.java)
     }
+}
 }

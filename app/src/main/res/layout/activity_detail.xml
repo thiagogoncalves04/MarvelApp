@@ -12,13 +12,14 @@
     <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/loading_image"
+            app:srcCompat="@drawable/loading_image"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/imageDetailCharacter"
             android:layout_marginTop="2dp"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" android:layout_marginEnd="2dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:layout_marginEnd="2dp"/>
 
     <TextView
             android:layout_width="wrap_content"

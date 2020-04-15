@@ -4,7 +4,6 @@ import android.util.Log
 import com.example.marvelappkotlin.HomeContract
 import com.example.marvelappkotlin.data.MarvelAPI
 import com.example.marvelappkotlin.model.Character
-import com.example.marvelappkotlin.model.Data
 import com.example.marvelappkotlin.ui.HomeActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
